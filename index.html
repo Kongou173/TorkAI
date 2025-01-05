@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>?</title>
+  <script>
+    function sendMessage() {
+      var userInput = document.getElementById('userInput').value;
+      var url = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_URL/exec'; // GASのデプロイURLに置き換えてください
+
+      var payload = {
+        "message": userInput
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('response').innerText = data.response;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>?</h1>
+  <label for="userInput">メッセージを入力:</label>
+  <input type="text" id="userInput" />
+  <button onclick="sendMessage()">送信</button>
+  <div id="response"></div>
+</body>
+</html>
